@@ -19,6 +19,10 @@ fi
 
 
 yes | termux-wake-lock
+    [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.us.z64
+		[ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.eu.z64
+		[ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.jp.z64
+
     [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	cp /storage/emulated/0/Download/baserom.us.z64 ~/
     [ -f /storage/emulated/0/baserom.us.z64 ] &&					cp /storage/emulated/0/baserom.us.z64 ~/
     [ -f /storage/emulated/0/Download/baserom.eu.z64 ] && cp /storage/emulated/0/Download/baserom.eu.z64 ~/
