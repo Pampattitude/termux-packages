@@ -95,12 +95,12 @@ then
 # 	git submodule update --init --recursive
 # 	make distclean
 # else
-git clone --recursive https://github.com/robertkirkman/sm64ex-omm.git
+git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
 cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
 cd sm64ex-omm
 # fi
 
-# https://github.com/robertkirkman/sm64ex-coop/blob/android/README_android.md
+# https://github.com/izzy2fancy/sm64ex-coop/blob/android/README_android.md
 pkg install p7zip
 wget https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/wp-content/uploads/2023/01/Render96_Chars.zip
 7z x Render96_Chars.zip
