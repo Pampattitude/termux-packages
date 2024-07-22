@@ -49,6 +49,7 @@ else
 fi
 echo 'a'
 BASEROM_FILE=$(basename "${BASEROM_PATH}")
+VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)"
 echo 'b'
 
 # https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
@@ -86,13 +87,9 @@ EOF
 else
 	cp "${BASEROM_PATH}" "~/${BASEROM_FILE}"
 fi
-echo 'f'
 apt-mark hold bash
-echo 'g'
 yes | pkg upgrade -y
-echo 'h'
 yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
-echo 'i'
 cd
 if [ -d "sm64ex-omm" ]
 then
@@ -104,11 +101,8 @@ then
 	git submodule update --init --recursive
 	make distclean
 else
-echo 'ii'
 git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
-echo 'j'
 cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
-echo 'k'
 cd sm64ex-omm
 fi
 
@@ -117,13 +111,8 @@ wget https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/w
 unzip Render96_Chars.zip
 mkdir -p /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
-echo 'l'
 
-VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)"
-VERSION_$(echo ${VERSION} | tr "-" "_" | tr "[:lower:]" "[:upper:]")=true
-echo 'm'
 make 2>&1 | tee build.log
-echo 'n'
 if ! [ -f build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk ]
 then
 	cat <<EOF
