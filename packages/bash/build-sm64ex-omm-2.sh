@@ -27,6 +27,7 @@ yes | termux-wake-lock
     [ -f /storage/emulated/0/baserom.jp.z64 ] &&					cp /storage/emulated/0/baserom.jp.z64 ~/
 if [[ -f ~/baserom.us.z64 || -f ~/baserom.eu.z64 || -f ~/baserom.jp.z64 ]]
 then
+
 	if [ -f ~/baserom.us.z64 ]
 	then
 		BASEROM_PATH=~/baserom.us.z64
