@@ -19,16 +19,14 @@ fi
 
 
 yes | termux-wake-lock
-    [[ -e /storage/emulated/0/Download/baserom.us.z64 ]] &&	cp /storage/emulated/0/Download/baserom.us.z64 ~/
-    [[ -e /storage/emulated/0/baserom.us.z64 ]] &&					cp /storage/emulated/0/baserom.us.z64 ~/
-    [[ -e /storage/emulated/0/Download/baserom.eu.z64 ]] && cp /storage/emulated/0/Download/baserom.eu.z64 ~/
-    [[ -e /storage/emulated/0/baserom.eu.z64 ]] &&					cp /storage/emulated/0/baserom.eu.z64 ~/
-    [[ -e /storage/emulated/0/Download/baserom.jp.z64 ]] && cp /storage/emulated/0/Download/baserom.jp.z64 ~/
-    [[ -e /storage/emulated/0/baserom.jp.z64 ]] &&					cp /storage/emulated/0/baserom.jp.z64 ~/
+    [[ -f /storage/emulated/0/Download/baserom.us.z64 ]] &&	cp /storage/emulated/0/Download/baserom.us.z64 ~/
+    [[ -f /storage/emulated/0/baserom.us.z64 ]] &&					cp /storage/emulated/0/baserom.us.z64 ~/
+    [[ -f /storage/emulated/0/Download/baserom.eu.z64 ]] && cp /storage/emulated/0/Download/baserom.eu.z64 ~/
+    [[ -f /storage/emulated/0/baserom.eu.z64 ]] &&					cp /storage/emulated/0/baserom.eu.z64 ~/
+    [[ -f /storage/emulated/0/Download/baserom.jp.z64 ]] && cp /storage/emulated/0/Download/baserom.jp.z64 ~/
+    [[ -f /storage/emulated/0/baserom.jp.z64 ]] &&					cp /storage/emulated/0/baserom.jp.z64 ~/
 if [ -f ~/baserom.*.z64 ]
 then
-
-
 	if [ -f ~/baserom.us.z64 ]
 	then
 		BASEROM_PATH=~/baserom.us.z64
@@ -43,14 +41,11 @@ then
 		echo "Found rom $(basename "${BASEROM_PATH}")"
 	fi
 
-
 	if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
 	then
 		echo && echo $RESTART_INSTRUCTIONS
 		exit 0
 	fi
-
-
 else
 	echo 'Autodetecting baserom.*.z64. This can take a long time.'
 	BASEROM_PATH=$(find /storage/emulated/0 -type f -exec md5sum {} + 2>/dev/null | grep '^20b854b239203baf6c961b850a4a51a2' | head -n1 | cut -d'/' -f2- | xargs -I "%" echo /%)
