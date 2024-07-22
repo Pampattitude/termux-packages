@@ -1,9 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 RESTART_INSTRUCTIONS="Dropping to shell. To rebuild, swipe from the top of your screen, touch the arrow on the right side of your Termux Notificiation, touch "Exit", then relaunch this app."
-if ! ls /storage/emulated/0 >/dev/null 2>&1
-then
-    yes | pkg install termux-am
-	yes | termux-setup-storage	
+if ! ls /storage/emulated/0 >/dev/null 2>&1; then
+	yes | pkg install termux-am
+	yes | termux-setup-storage
 fi
 cat <<EOF
 ___  _  _ _ _    ___  ____ ____
@@ -11,35 +10,30 @@ ___  _  _ _ _    ___  ____ ____
 |__] |__| | |___ |__/ |___ |  \\
 EOF
 
-
 yes | termux-wake-lock
-    [ -f sm64ex-omm/baserom.us.z64 ] &&	rm -f sm64ex-omm/baserom.us.z64
-    [ -f sm64ex-omm/baserom.eu.z64 ] &&	rm -f sm64ex-omm/baserom.eu.z64
-    [ -f sm64ex-omm/baserom.jp.z64 ] &&	rm -f sm64ex-omm/baserom.jp.z64
-    [ -f ~/baserom.us.z64 ] &&	rm -f ~/baserom.us.z64
-    [ -f ~/baserom.eu.z64 ] &&	rm -f ~/baserom.eu.z64
-    [ -f ~/baserom.jp.z64 ] &&	rm -f ~/baserom.jp.z64
+[ -f sm64ex-omm/baserom.us.z64 ] && rm -f sm64ex-omm/baserom.us.z64
+[ -f sm64ex-omm/baserom.eu.z64 ] && rm -f sm64ex-omm/baserom.eu.z64
+[ -f sm64ex-omm/baserom.jp.z64 ] && rm -f sm64ex-omm/baserom.jp.z64
+[ -f ~/baserom.us.z64 ] && rm -f ~/baserom.us.z64
+[ -f ~/baserom.eu.z64 ] && rm -f ~/baserom.eu.z64
+[ -f ~/baserom.jp.z64 ] && rm -f ~/baserom.jp.z64
 
-    [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	cp /storage/emulated/0/Download/baserom.us.z64 ~/
-    [ -f /storage/emulated/0/baserom.us.z64 ] &&					cp /storage/emulated/0/baserom.us.z64 ~/
-    [ -f /storage/emulated/0/Download/baserom.eu.z64 ] && cp /storage/emulated/0/Download/baserom.eu.z64 ~/
-    [ -f /storage/emulated/0/baserom.eu.z64 ] &&					cp /storage/emulated/0/baserom.eu.z64 ~/
-    [ -f /storage/emulated/0/Download/baserom.jp.z64 ] && cp /storage/emulated/0/Download/baserom.jp.z64 ~/
-    [ -f /storage/emulated/0/baserom.jp.z64 ] &&					cp /storage/emulated/0/baserom.jp.z64 ~/
-if [[ -f ~/baserom.us.z64 || -f ~/baserom.eu.z64 || -f ~/baserom.jp.z64 ]]
-then
+[ -f /storage/emulated/0/Download/baserom.us.z64 ] && cp /storage/emulated/0/Download/baserom.us.z64 ~/
+[ -f /storage/emulated/0/baserom.us.z64 ] && cp /storage/emulated/0/baserom.us.z64 ~/
+[ -f /storage/emulated/0/Download/baserom.eu.z64 ] && cp /storage/emulated/0/Download/baserom.eu.z64 ~/
+[ -f /storage/emulated/0/baserom.eu.z64 ] && cp /storage/emulated/0/baserom.eu.z64 ~/
+[ -f /storage/emulated/0/Download/baserom.jp.z64 ] && cp /storage/emulated/0/Download/baserom.jp.z64 ~/
+[ -f /storage/emulated/0/baserom.jp.z64 ] && cp /storage/emulated/0/baserom.jp.z64 ~/
+if [[ -f ~/baserom.us.z64 || -f ~/baserom.eu.z64 || -f ~/baserom.jp.z64 ]]; then
 	echo
 
-	if [ -f ~/baserom.us.z64 ]
-	then
+	if [ -f ~/baserom.us.z64 ]; then
 		BASEROM_PATH=~/baserom.us.z64
 		echo "Found rom $(basename "${BASEROM_PATH}")"
-	elif [ -f ~/baserom.eu.z64 ]
-	then
+	elif [ -f ~/baserom.eu.z64 ]; then
 		BASEROM_PATH=~/baserom.eu.z64
 		echo "Found rom $(basename "${BASEROM_PATH}")"
-	elif [ -f ~/baserom.jp.z64 ]
-	then
+	elif [ -f ~/baserom.jp.z64 ]; then
 		BASEROM_PATH=~/baserom.jp.z64
 		echo "Found rom $(basename "${BASEROM_PATH}")"
 	fi
@@ -53,8 +47,7 @@ VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)"
 echo 'b'
 
 # https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
-if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
-then
+if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key; then #key in a sense has no use at all
 	echo && echo $RESTART_INSTRUCTIONS
 	exit 0
 fi
@@ -62,26 +55,24 @@ echo 'c'
 
 BLOCKS_FREE=$(awk -F ' ' '{print $4}' <(df | grep emulated))
 echo 'd'
-if (( 2097152 > BLOCKS_FREE ))
-then
+if ((2097152 > BLOCKS_FREE)); then
 	cat <<EOF
 ____ _  _ _    _   
 |___ |  | |    |   
 |    |__| |___ |___
 EOF
-    echo 'Your device storage needs at least 2 GB free space to continue!'
+	echo 'Your device storage needs at least 2 GB free space to continue!'
 	echo $RESTART_INSTRUCTIONS
 	exit 1
 fi
 echo 'e'
-if [ -z "${BASEROM_PATH}" ]
-then
+if [ -z "${BASEROM_PATH}" ]; then
 	cat <<EOF
 _  _ ____    ____ ____ _  _
 |\ | |  |    |__/ |  | |\/|
 | \| |__|    |  \ |__| |  |
 EOF
-    echo "Go to https://github.com/sanni/cartreader to learn how to get ${BASEROM_FILE}"
+	echo "Go to https://github.com/sanni/cartreader to learn how to get ${BASEROM_FILE}"
 	echo $RESTART_INSTRUCTIONS
 	exit 2
 else
@@ -91,8 +82,7 @@ apt-mark hold bash
 yes | pkg upgrade -y
 yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
 cd
-if [ -d "sm64ex-omm" ]
-then
+if [ -d "sm64ex-omm" ]; then
 	# rm -Rf "sm64ex-omm"
 	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
 	cd sm64ex-omm
@@ -101,9 +91,9 @@ then
 	git submodule update --init --recursive
 	make distclean
 else
-git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
-cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
-cd sm64ex-omm
+	git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
+	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
+	cd sm64ex-omm
 fi
 
 # https://github.com/izzy2fancy/sm64ex-coop/blob/android/README_android.md
@@ -113,14 +103,13 @@ mkdir -p /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 
 make 2>&1 | tee build.log
-if ! [ -f build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk ]
-then
+if ! [ -f build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk ]; then
 	cat <<EOF
 ____ ____ _ _    _  _ ____ ____
 |___ |__| | |    |  | |__/ |___
 |    |  | | |___ |__| |  \ |___
 EOF
-    cat build.log | nc termbin.com 9999
+	cat build.log | nc termbin.com 9999
 	echo $RESTART_INSTRUCTIONS
 	exit 3
 fi
