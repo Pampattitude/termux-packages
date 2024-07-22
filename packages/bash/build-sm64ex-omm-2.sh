@@ -83,7 +83,6 @@ yes | pkg upgrade -y
 yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
 cd
 if [ -d "sm64ex-omm" ]; then
-	# rm -Rf "sm64ex-omm"
 	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
 	cd sm64ex-omm
 	git reset --hard HEAD
