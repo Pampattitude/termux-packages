@@ -25,7 +25,7 @@ yes | termux-wake-lock
     [ -f /storage/emulated/0/baserom.eu.z64 ] &&					cp /storage/emulated/0/baserom.eu.z64 ~/
     [ -f /storage/emulated/0/Download/baserom.jp.z64 ] && cp /storage/emulated/0/Download/baserom.jp.z64 ~/
     [ -f /storage/emulated/0/baserom.jp.z64 ] &&					cp /storage/emulated/0/baserom.jp.z64 ~/
-if [ -f ~/baserom.*.z64 ]
+if [[ -f ~/baserom.us.z64 || -f ~/baserom.eu.z64 || -f ~/baserom.jp.z64 ]]
 then
 	if [ -f ~/baserom.us.z64 ]
 	then
