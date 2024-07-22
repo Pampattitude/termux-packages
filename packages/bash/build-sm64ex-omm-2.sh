@@ -83,7 +83,7 @@ else
 fi
 apt-mark hold bash
 yes | pkg upgrade -y
-yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd p7zip
+yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
 cd
 if [ -d "sm64ex-omm" ]
 then
@@ -102,7 +102,7 @@ cd sm64ex-omm
 
 # https://github.com/izzy2fancy/sm64ex-coop/blob/android/README_android.md
 wget https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/wp-content/uploads/2023/01/Render96_Chars.zip
-7z x Render96_Chars.zip
+unzip Render96_Chars.zip
 mkdir -p /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 
