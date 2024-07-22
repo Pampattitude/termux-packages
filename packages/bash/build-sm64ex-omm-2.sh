@@ -13,9 +13,12 @@ EOF
 
 
 yes | termux-wake-lock
-    [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.us.z64
-    [ -f /storage/emulated/0/Download/baserom.eu.z64 ] &&	rm -f ~/baserom.eu.z64
-    [ -f /storage/emulated/0/Download/baserom.jp.z64 ] &&	rm -f ~/baserom.jp.z64
+    [ -f sm64ex-omm/baserom.us.z64 ] &&	rm -f sm64ex-omm/baserom.us.z64
+    [ -f sm64ex-omm/baserom.eu.z64 ] &&	rm -f sm64ex-omm/baserom.eu.z64
+    [ -f sm64ex-omm/baserom.jp.z64 ] &&	rm -f sm64ex-omm/baserom.jp.z64
+    [ -f ~/baserom.us.z64 ] &&	rm -f ~/baserom.us.z64
+    [ -f ~/baserom.eu.z64 ] &&	rm -f ~/baserom.eu.z64
+    [ -f ~/baserom.jp.z64 ] &&	rm -f ~/baserom.jp.z64
 
     [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	cp /storage/emulated/0/Download/baserom.us.z64 ~/
     [ -f /storage/emulated/0/baserom.us.z64 ] &&					cp /storage/emulated/0/baserom.us.z64 ~/
@@ -104,8 +107,9 @@ cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64exomm
 rm -r Render96_Chars.zip
 rm -r Render96_Chars
 
+VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)"
 VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)" make 2>&1 | tee build.log
-if ! [ -f build/us_pc/sm64.us.f3dex2e.apk ]
+if ! [ -f build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk ]
 then
 	cat <<EOF
 ____ ____ _ _    _  _ ____ ____
@@ -116,12 +120,12 @@ EOF
 	echo $RESTART_INSTRUCTIONS
 	exit 3
 fi
-cp build/us_pc/sm64.us.f3dex2e.apk /storage/emulated/0
+cp "build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk" /storage/emulated/0
 cat <<EOF
 ___  ____ _  _ ____
 |  \ |  | |\ | |___
 |__/ |__| | \| |___
 EOF
-echo 'Go to Files and touch sm64.us.f3dex2e.apk to install!'
+echo "Go to Files and touch sm64.${VERSION}.f3dex2e.apk to install!"
 yes | termux-wake-unlock
 echo $RESTART_INSTRUCTIONS
