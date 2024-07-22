@@ -47,7 +47,9 @@ else
 	echo 'Autodetecting baserom.*.z64. This can take a long time.'
 	BASEROM_PATH=$(find /storage/emulated/0 -type f -exec md5sum {} + 2>/dev/null | grep '^20b854b239203baf6c961b850a4a51a2' | head -n1 | cut -d'/' -f2- | xargs -I "%" echo /%)
 fi
+echo 'a'
 BASEROM_FILE=$(basename "${BASEROM_PATH}")
+echo 'b'
 
 # https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
 if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
@@ -55,8 +57,10 @@ then
 	echo && echo $RESTART_INSTRUCTIONS
 	exit 0
 fi
+echo 'c'
 
 BLOCKS_FREE=$(awk -F ' ' '{print $4}' <(df | grep emulated))
+echo 'd'
 if (( 2097152 > BLOCKS_FREE ))
 then
 	cat <<EOF
@@ -68,6 +72,7 @@ EOF
 	echo $RESTART_INSTRUCTIONS
 	exit 1
 fi
+echo 'e'
 if [ -z "${BASEROM_PATH}" ]
 then
 	cat <<EOF
@@ -81,9 +86,13 @@ EOF
 else
 	cp "${BASEROM_PATH}" "~/${BASEROM_FILE}"
 fi
+echo 'f'
 apt-mark hold bash
+echo 'g'
 yes | pkg upgrade -y
+echo 'h'
 yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binutils libglvnd-dev aapt which netcat-openbsd
+echo 'i'
 cd
 if [ -d "sm64ex-omm" ]
 then
@@ -96,7 +105,9 @@ then
 # 	make distclean
 # else
 git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
+echo 'j'
 cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
+echo 'k'
 cd sm64ex-omm
 # fi
 
@@ -105,10 +116,13 @@ wget https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/w
 unzip Render96_Chars.zip
 mkdir -p /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
+echo 'l'
 
 VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)"
 VERSION_$(echo ${VERSION} | tr "-" "_" | tr "[:lower:]" "[:upper:]")=true
+echo 'm'
 make 2>&1 | tee build.log
+echo 'n'
 if ! [ -f build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk ]
 then
 	cat <<EOF
