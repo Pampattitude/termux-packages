@@ -14,8 +14,8 @@ EOF
 
 yes | termux-wake-lock
     [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.us.z64
-    [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.eu.z64
-    [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	rm -f ~/baserom.jp.z64
+    [ -f /storage/emulated/0/Download/baserom.eu.z64 ] &&	rm -f ~/baserom.eu.z64
+    [ -f /storage/emulated/0/Download/baserom.jp.z64 ] &&	rm -f ~/baserom.jp.z64
 
     [ -f /storage/emulated/0/Download/baserom.us.z64 ] &&	cp /storage/emulated/0/Download/baserom.us.z64 ~/
     [ -f /storage/emulated/0/baserom.us.z64 ] &&					cp /storage/emulated/0/baserom.us.z64 ~/
@@ -95,7 +95,7 @@ else
 	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
 	cd sm64ex-omm
 fi
-make 2>&1 | tee build.log
+VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)" make 2>&1 | tee build.log
 if ! [ -f build/us_pc/sm64.us.f3dex2e.apk ]
 then
 	cat <<EOF
