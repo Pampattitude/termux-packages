@@ -41,20 +41,16 @@ else
 	echo 'Autodetecting baserom.*.z64. This can take a long time.'
 	BASEROM_PATH=$(find /storage/emulated/0 -type f -exec md5sum {} + 2>/dev/null | grep '^20b854b239203baf6c961b850a4a51a2' | head -n1 | cut -d'/' -f2- | xargs -I "%" echo /%)
 fi
-echo 'a'
 BASEROM_FILE=$(basename "${BASEROM_PATH}")
 VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)"
-echo 'b'
 
 # https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
 if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key; then #key in a sense has no use at all
 	echo && echo $RESTART_INSTRUCTIONS
 	exit 0
 fi
-echo 'c'
 
 BLOCKS_FREE=$(awk -F ' ' '{print $4}' <(df | grep emulated))
-echo 'd'
 if ((2097152 > BLOCKS_FREE)); then
 	cat <<EOF
 ____ _  _ _    _   
@@ -65,7 +61,6 @@ EOF
 	echo $RESTART_INSTRUCTIONS
 	exit 1
 fi
-echo 'e'
 if [ -z "${BASEROM_PATH}" ]; then
 	cat <<EOF
 _  _ ____    ____ ____ _  _
