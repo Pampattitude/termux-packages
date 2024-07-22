@@ -96,22 +96,21 @@ echo 'i'
 cd
 if [ -d "sm64ex-omm" ]
 then
-	rm -Rf "sm64ex-omm"
-# 	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
-# 	cd sm64ex-omm
-# 	git reset --hard HEAD
-# 	git pull origin izzys
-# 	git submodule update --init --recursive
-# 	make distclean
-# else
-fi
+	# rm -Rf "sm64ex-omm"
+	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
+	cd sm64ex-omm
+	git reset --hard HEAD
+	git pull origin izzys
+	git submodule update --init --recursive
+	make distclean
+else
 echo 'ii'
 git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
 echo 'j'
 cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
 echo 'k'
 cd sm64ex-omm
-# fi
+fi
 
 # https://github.com/izzy2fancy/sm64ex-coop/blob/android/README_android.md
 wget https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/wp-content/uploads/2023/01/Render96_Chars.zip
