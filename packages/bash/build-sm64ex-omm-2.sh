@@ -104,6 +104,7 @@ then
 # 	git submodule update --init --recursive
 # 	make distclean
 # else
+fi
 git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
 echo 'j'
 cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
