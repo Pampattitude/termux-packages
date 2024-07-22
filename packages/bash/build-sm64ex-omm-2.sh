@@ -101,6 +101,8 @@ wget https://sm64ex-coopmods.com/wp-content/uploads/2023/01/Render96_Chars.zip
 7z x Render96_Chars.zip
 mkdir -p /storage/emulated/0/com.owokitty.sm64exomm/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64exomm/dynos/packs/
+rm -r Render96_Chars.zip
+rm -r Render96_Chars
 
 VERSION="$(echo ${BASEROM_FILE} | cut -d. -f2)" make 2>&1 | tee build.log
 if ! [ -f build/us_pc/sm64.us.f3dex2e.apk ]
