@@ -19,19 +19,19 @@ fi
 
 
 yes | termux-wake-lock
-    cp -f /storage/emulated/0/Download/baserom.us.z64 ~/
-    cp -f /storage/emulated/0/baserom.us.z64 ~/
-    cp -f /storage/emulated/0/Download/baserom.eu.z64 ~/
-    cp -f /storage/emulated/0/baserom.eu.z64 ~/
-    cp -f /storage/emulated/0/Download/baserom.jp.z64 ~/
-    cp -f /storage/emulated/0/baserom.jp.z64 ~/
+    cp /storage/emulated/0/Download/baserom.us.z64 ~/
+    cp /storage/emulated/0/baserom.us.z64 ~/
+    cp /storage/emulated/0/Download/baserom.eu.z64 ~/
+    cp /storage/emulated/0/baserom.eu.z64 ~/
+    cp /storage/emulated/0/Download/baserom.jp.z64 ~/
+    cp /storage/emulated/0/baserom.jp.z64 ~/
 echo 'Autodetecting baserom.*.z64. This can take a long time.'
 if [ -f ~/baserom.us.z64 ]
 then
 	BASEROM_PATH=~/baserom.us.z64
-else if [ -f ~/baserom.eu.z64 ]
+elif [ -f ~/baserom.eu.z64 ]
 	BASEROM_PATH=~/baserom.eu.z64
-else if [ -f ~/baserom.jp.z64 ]
+elif [ -f ~/baserom.jp.z64 ]
 	BASEROM_PATH=~/baserom.jp.z64
 else
 	BASEROM_PATH=$(find /storage/emulated/0 -type f -exec md5sum {} + 2>/dev/null | grep '^20b854b239203baf6c961b850a4a51a2' | head -n1 | cut -d'/' -f2- | xargs -I "%" echo /%)
