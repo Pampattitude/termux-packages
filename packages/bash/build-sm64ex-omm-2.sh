@@ -25,17 +25,29 @@ yes | termux-wake-lock
     cp /storage/emulated/0/baserom.eu.z64 ~/
     cp /storage/emulated/0/Download/baserom.jp.z64 ~/
     cp /storage/emulated/0/baserom.jp.z64 ~/
-echo 'Autodetecting baserom.*.z64. This can take a long time.'
-if [ -f ~/baserom.us.z64 ]
+if [ -f ~/baserom.*.z64 ]
 then
-	BASEROM_PATH=~/baserom.us.z64
-elif [ -f ~/baserom.eu.z64 ]
-then
-	BASEROM_PATH=~/baserom.eu.z64
-elif [ -f ~/baserom.jp.z64 ]
-then
-	BASEROM_PATH=~/baserom.jp.z64
+	if [ -f ~/baserom.us.z64 ]
+	then
+		BASEROM_PATH=~/baserom.us.z64
+		echo "Found rom $(basename "${BASEROM_PATH}")"
+	elif [ -f ~/baserom.eu.z64 ]
+	then
+		BASEROM_PATH=~/baserom.eu.z64
+		echo "Found rom $(basename "${BASEROM_PATH}")"
+	elif [ -f ~/baserom.jp.z64 ]
+	then
+		BASEROM_PATH=~/baserom.jp.z64
+		echo "Found rom $(basename "${BASEROM_PATH}")"
+	else
+	fi
+	if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
+	then
+		echo && echo $RESTART_INSTRUCTIONS
+		exit 0
+	fi
 else
+	echo 'Autodetecting baserom.*.z64. This can take a long time.'
 	BASEROM_PATH=$(find /storage/emulated/0 -type f -exec md5sum {} + 2>/dev/null | grep '^20b854b239203baf6c961b850a4a51a2' | head -n1 | cut -d'/' -f2- | xargs -I "%" echo /%)
 fi
 BASEROM_FILE=$(basename "${BASEROM_PATH}")
