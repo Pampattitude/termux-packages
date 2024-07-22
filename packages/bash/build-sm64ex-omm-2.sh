@@ -87,17 +87,18 @@ yes | pkg install git wget mesa-dev make python getconf zip apksigner clang binu
 cd
 if [ -d "sm64ex-omm" ]
 then
-	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
-	cd sm64ex-omm
-	git reset --hard HEAD
-	git pull origin izzys
-	git submodule update --init --recursive
-	make distclean
-else
-	git clone --recursive https://github.com/izzy2fancy/sm64ex-omm.git
-	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
-	cd sm64ex-omm
-fi
+	rm -Rf "sm64ex-omm"
+# 	cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
+# 	cd sm64ex-omm
+# 	git reset --hard HEAD
+# 	git pull origin izzys
+# 	git submodule update --init --recursive
+# 	make distclean
+# else
+git clone --recursive https://github.com/robertkirkman/sm64ex-omm.git
+cp "${BASEROM_PATH}" "sm64ex-omm/${BASEROM_FILE}"
+cd sm64ex-omm
+# fi
 
 # https://github.com/robertkirkman/sm64ex-coop/blob/android/README_android.md
 pkg install p7zip
