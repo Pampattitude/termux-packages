@@ -39,8 +39,8 @@ then
 	then
 		BASEROM_PATH=~/baserom.jp.z64
 		echo "Found rom $(basename "${BASEROM_PATH}")"
-	else
 	fi
+
 	if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key #key in a sense has no use at all
 	then
 		echo && echo $RESTART_INSTRUCTIONS
