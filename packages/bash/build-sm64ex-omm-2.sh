@@ -100,6 +100,13 @@ wget https://web.archive.org/web/20231228171913if_/https://sm64ex-coopmods.com/w
 unzip Render96_Chars.zip
 mkdir -p /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
 cp -r Render96_Chars/Render96\ Chars/ /storage/emulated/0/com.owokitty.sm64excoop/dynos/packs/
+rm -Rf Render96_Chars.zip Render96_Chars/
+
+# https://stackoverflow.com/questions/34457830/press-any-key-to-abort-in-5-seconds
+if read -r -s -n 1 -t 5 -p "Press any key within 5 seconds to cancel build" key; then #key in a sense has no use at all
+	echo && echo $RESTART_INSTRUCTIONS
+	exit 0
+fi
 
 make 2>&1 | tee build.log
 if ! [ -f build/${VERSION}_pc/sm64.${VERSION}.f3dex2e.apk ]; then
